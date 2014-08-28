@@ -22,13 +22,13 @@ Or install it yourself as:
 
 Ruby settings
 
-    Ngareboshi.configure do |config|
+    Nagareboshi.configure do |config|
       config.send = true
     end
 
 Rails settings send to production only
 
-    Ngareboshi.configure do |config|
+    Nagareboshi.configure do |config|
       config.send = Rails.env.production?
     end
 

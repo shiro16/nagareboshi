@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Nagareboshi::Sender do
-  let(:url) { "http://localhost/" }
+  let(:url) { "http://localhost/publish" }
   let(:sender) { Nagareboshi::Sender }
   before do
     Nagareboshi.configure do |config|
@@ -74,11 +74,11 @@ describe Nagareboshi::Sender do
 
       it "ssl? is true" do
         allow(sender).to receive(:ssl?).and_return(true)
-        expect(subject).to eq "https://localhost/"
+        expect(subject).to eq "https://localhost/publish"
       end
 
       it "ssl? is false" do
-        expect(subject).to eq "http://localhost/"
+        expect(subject).to eq "http://localhost/publish"
       end
     end
 

@@ -5,7 +5,7 @@ module Nagareboshi
     def initialize
       @host    = "pubsubhubbub.appspot.com"
       @send    = false
-      @use_ssl = true
+      @use_ssl = false
     end
   end
 end
