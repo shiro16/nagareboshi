@@ -35,7 +35,7 @@ module Nagareboshi
       end
 
       def uri
-        "#{ssl? ? 'https' : 'http'}://#{Nagareboshi.configuration.host}/publish"
+        "#{ssl? ? 'https' : 'http'}://#{Nagareboshi.configuration.host}/#{Nagareboshi.configuration.path}"
       end
 
       def port

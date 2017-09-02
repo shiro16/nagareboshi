@@ -12,6 +12,7 @@ describe Nagareboshi do
         config.send    = true
         config.use_ssl = false
         config.port    = 3000
+        config.path    = 'callback'
       end
     end
 
@@ -19,5 +20,6 @@ describe Nagareboshi do
     it { expect(Nagareboshi.configuration.send).to be_truthy }
     it { expect(Nagareboshi.configuration.use_ssl).to be_falsy }
     it { expect(Nagareboshi.configuration.port).to eq 3000 }
+    it { expect(Nagareboshi.configuration.path).to eq 'callback'}
   end
 end
