@@ -82,6 +82,34 @@ describe Nagareboshi::Sender do
       end
     end
 
+    describe "port" do
+      subject { sender.send(:port) }
+
+      context "use_ssl? is false" do
+        it "returns 80" do
+          expect(subject).to eq(80)
+        end
+      end
+
+      context "use_ssl? is true" do
+        it "returns 443" do
+          allow(Nagareboshi.configuration).to receive(:use_ssl).and_return(true)
+          expect(subject).to eq(443)
+        end
+      end
+
+      context "port is configured" do
+        before do
+          Nagareboshi.configure do |config|
+            config.port = 3000
+          end
+        end
+        it "returns configured value" do
+          expect(subject).to eq(3000)
+        end
+      end
+    end
+
     context "ssl?" do
       subject { sender.send(:ssl?) }
       

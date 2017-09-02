@@ -19,7 +19,7 @@ module Nagareboshi
       end
 
       def ☆(request)
-        http = Net::HTTP.new(Nagareboshi.configuration.host, ssl? ? 443 : 80)
+        http = Net::HTTP.new(Nagareboshi.configuration.host, port)
         http.use_ssl = ssl?
         response = http.start do |http|
           http.request request
@@ -36,6 +36,14 @@ module Nagareboshi
 
       def uri
         "#{ssl? ? 'https' : 'http'}://#{Nagareboshi.configuration.host}/publish"
+      end
+
+      def port
+        if port = Nagareboshi.configuration.port
+          port
+        else
+          ssl? ? 443 : 80
+        end
       end
 
       def ssl?

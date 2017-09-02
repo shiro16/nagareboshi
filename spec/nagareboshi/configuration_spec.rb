@@ -8,5 +8,6 @@ describe Nagareboshi::Configuration do
     it { expect(configuration.host).to eq "pubsubhubbub.appspot.com" }
     it { expect(configuration.send).to be_falsy }
     it { expect(configuration.use_ssl).to be_falsy }
+    it { expect(configuration.port).to be_falsy }
   end
 end
