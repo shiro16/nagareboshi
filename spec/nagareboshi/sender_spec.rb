@@ -69,16 +69,59 @@ describe Nagareboshi::Sender do
       end
     end
 
-    context "uri" do
+    describe "uri" do
       subject { sender.send(:uri) }
 
-      it "ssl? is true" do
-        allow(sender).to receive(:ssl?).and_return(true)
-        expect(subject).to eq "https://localhost/publish"
+      context "ssl? is true" do
+        it "returns https scheme" do
+          allow(sender).to receive(:ssl?).and_return(true)
+          expect(subject).to eq "https://localhost/publish"
+        end
       end
 
-      it "ssl? is false" do
-        expect(subject).to eq "http://localhost/publish"
+      context "ssl? is false" do
+        it "returns http scheme" do
+          expect(subject).to eq "http://localhost/publish"
+        end
+      end
+
+      context "path is configured" do
+        before do
+          Nagareboshi.configure do |config|
+            config.path = 'callback'
+          end
+        end
+        it "returns configured path" do
+          expect(subject).to eq "http://localhost/callback"
+        end
+      end
+    end
+
+    describe "port" do
+      subject { sender.send(:port) }
+
+      context "use_ssl? is false" do
+        it "returns 80" do
+          expect(subject).to eq(80)
+        end
+      end
+
+      context "use_ssl? is true" do
+        it "returns 443" do
+          allow(Nagareboshi.configuration).to receive(:use_ssl).and_return(true)
+          expect(subject).to eq(443)
+        end
+      end
+
+      context "port is configured" do
+        before do
+          Nagareboshi.configure do |config|
+            config.port = 3000
+          end
+        end
+        it "returns configured value" do
+          expect(subject).to eq(3000)
+        end
       end
     end
 
